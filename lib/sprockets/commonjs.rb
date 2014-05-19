@@ -8,7 +8,7 @@ module Sprockets
                      '%s' +
                      ";}});\n"
 
-    EXTENSIONS = %w{.module .cjs}
+    EXTENSIONS = %w{.module .cjs .js}
 
     class << self
       attr_accessor :default_namespace
