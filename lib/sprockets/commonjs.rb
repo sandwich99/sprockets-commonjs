@@ -43,7 +43,7 @@ module Sprockets
     
     def should_commonjs?(scope)
       #Rails.application.config.sprockets_commonjs.paths.any? do |basic_path|
-      'deps'.include?(scope.logical_path.split('/')[0])
+      ['deps','desktop','mobile'].include?(scope.logical_path.split('/')[0])
     end
 
     def module_name(scope)
