@@ -41,7 +41,8 @@ module Sprockets
     end
     
     def should_commonjs?(scope)
-      Rails.application.config.sprockets_commonjs.paths.any? do |basic_path|
+      #Rails.application.config.sprockets_commonjs.paths.any? do |basic_path|
+      ['deps'].each do |basic_path|
         basic_path.include?(scope.logical_path.split('/')[0])
       end
     end
