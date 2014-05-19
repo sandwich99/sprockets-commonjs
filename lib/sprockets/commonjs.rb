@@ -37,7 +37,8 @@ module Sprockets
     attr_reader :namespace
 
     def commonjs_module?(scope)
-      EXTENSIONS.include?(File.extname(scope.logical_path))
+      #EXTENSIONS.include?(File.extname(scope.logical_path))
+      true
     end
     
     def should_commonjs?(scope)
