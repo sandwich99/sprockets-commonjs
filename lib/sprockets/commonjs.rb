@@ -8,7 +8,7 @@ module Sprockets
                      '%s' +
                      ";}});\n"
 
-    EXTENSIONS = %w{.module .cjs .js}
+    EXTENSIONS = %w{.module .cjs}
 
     class << self
       attr_accessor :default_namespace
@@ -38,7 +38,7 @@ module Sprockets
 
     def commonjs_module?(scope)
       #EXTENSIONS.include?(File.extname(scope.logical_path))
-      File.extname(scope.logical_path) == '.js'
+      true
     end
 
     def module_name(scope)
