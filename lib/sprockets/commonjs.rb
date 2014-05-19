@@ -8,7 +8,7 @@ module Sprockets
                      '%s' +
                      ";}});\n"
 
-    EXTENSIONS = %w{.module .cjs}
+    EXTENSIONS = %w{.module .cjs .js}
 
     class << self
       attr_accessor :default_namespace
@@ -24,7 +24,7 @@ module Sprockets
     end
 
     def evaluate(scope, locals, &block)
-      if commonjs_module?(scope)
+      if should_commonjs?(scope) &&  commonjs_module?(scope)
         scope.require_asset 'sprockets/commonjs'
         WRAPPER % [ namespace, module_name(scope), data ]
       else
@@ -37,8 +37,13 @@ module Sprockets
     attr_reader :namespace
 
     def commonjs_module?(scope)
-      #EXTENSIONS.include?(File.extname(scope.logical_path))
-      true
+      EXTENSIONS.include?(File.extname(scope.logical_path))
+    end
+    
+    def should_commonjs?(scope)
+      Rails.application.config.sprockets_commonjs.paths.any? do |basic_path|
+        basic_path.include?(scope.logical_path.split('/')[0])
+      end
     end
 
     def module_name(scope)
